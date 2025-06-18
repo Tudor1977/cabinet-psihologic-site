@@ -1,66 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Articole - Cabinet Psihologic Tudor Bocăneală</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Articole</title>
+  <script type="module" src="firebase-articole.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+    .articol { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+    .articol h3 { margin: 0 0 10px; }
+  </style>
 </head>
-<body class="bg-white text-gray-900">
+<body>
+  <h1>Articole publicate</h1>
+  <div id="lista-articole">Se încarcă articolele...</div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  <header class="bg-blue-900 text-white p-4">
-    
+    const firebaseConfig = {
+      apiKey: "AIzaSyDQG6WD-N7ZjtNOC_zf8kMASMYEDujihdM",
+      authDomain: "cabinet-psihologic-4666e.firebaseapp.com",
+      projectId: "cabinet-psihologic-4666e",
+      storageBucket: "cabinet-psihologic-4666e.appspot.com",
+      messagingSenderId: "46348242698",
+      appId: "1:46348242698:web:15759be5ce3d4c4df274f3"
+    };
 
-<nav class="max-w-6xl mx-auto flex justify-between items-center">
-  <h1 class="text-xl font-bold">Cabinet Psihologic Tudor Bocăneală</h1>
-  <ul class="flex space-x-4">
-    <li><a href="index.html" class="hover:underline">Acasă</a></li>
-    <li><a href="despre-cabinet.html" class="hover:underline">Despre cabinet</a></li>
-    <li><a href="servicii.html" class="hover:underline">Servicii</a></li>
-    <li><a href="articole.html" class="hover:underline">Articole</a></li>
-    <li><a href="contact.html" class="hover:underline">Contact</a></li>
-    <li><a href="recenzii.html" class="hover:underline">Recenzii</a></li>
-    <li><a href="intrebari-frecvente.html" class="hover:underline">Întrebări frecvente</a></li>
-  </ul>
-</nav>
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
+    const lista = document.getElementById("lista-articole");
+    const articoleQuery = query(collection(db, "articole"), orderBy("data", "desc"));
 
-  </header>
-
-  <main class="py-12 px-6">
-    <div class="max-w-4xl mx-auto space-y-10">
-      
-      <article class="border-b pb-6">
-        <h2 class="text-2xl font-bold text-blue-800 mb-2">Ce este depresia?</h2>
-        <p class="text-gray-700 mb-2">
-          Depresia este o tulburare afectivă caracterizată printr-o stare persistentă de tristețe, lipsă de energie și pierderea interesului pentru activități cotidiene. Poate afecta somnul, apetitul și gândirea.
-        </p>
-        <a href="depresie.html" class="text-blue-600 hover:underline font-medium">Citește mai mult</a>
-      </article>
-
-      <article class="border-b pb-6">
-        <h2 class="text-2xl font-bold text-blue-800 mb-2">Înțelegerea dislexiei</h2>
-        <p class="text-gray-700 mb-2">
-          Dislexia este o dificultate specifică de învățare care afectează capacitatea de a citi corect și fluent. Este importantă identificarea timpurie și intervenția adecvată prin exerciții personalizate.
-        </p>
-        <a href="dislexie.html" class="text-blue-600 hover:underline font-medium">Citește mai mult</a>
-      </article>
-
-      <article class="border-b pb-6">
-        <h2 class="text-2xl font-bold text-blue-800 mb-2">Ce este disgrafia?</h2>
-        <p class="text-gray-700 mb-2">
-          Disgrafia este o tulburare de învățare care afectează abilitățile de scriere. Copiii cu disgrafie pot avea dificultăți în formarea literelor, menținerea lizibilității și organizarea ideilor în scris.
-        </p>
-        <a href="disgrafie.html" class="text-blue-600 hover:underline font-medium">Citește mai mult</a>
-      </article>
-
-    </div>
-  </main>
-
-  <footer class="bg-blue-900 text-white text-center p-4 mt-12">
-    &copy; 2025 Cabinet Psihologic Tudor Bocăneală. Toate drepturile rezervate.
-  </footer>
-
+    const snapshot = await getDocs(articoleQuery);
+    lista.innerHTML = "";
+    snapshot.forEach(doc => {
+      const art = doc.data();
+      const div = document.createElement("div");
+      div.className = "articol";
+      div.innerHTML = `<h3>${art.titlu}</h3><p>${art.descriere}</p>`;
+      lista.appendChild(div);
+    });
+  </script>
 </body>
 </html>
