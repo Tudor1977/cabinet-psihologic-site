@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Întrebări frecvente - Cabinet Psihologic Tudor Bocăneală</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .accordion-content { display: none; }
+    .accordion-button[aria-expanded="true"] + .accordion-content { display: block; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <header class="bg-blue-900 text-white p-4">
+    <nav class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">Cabinet Psihologic Tudor Bocăneală</h1>
+      <ul class="flex space-x-4">
+        <li><a href="index.html" class="hover:underline">Acasă</a></li>
+        <li><a href="despre-cabinet.html" class="hover:underline">Despre cabinet</a></li>
+        <li><a href="servicii.html" class="hover:underline">Servicii</a></li>
+        <li><a href="articole.html" class="hover:underline">Articole</a></li>
+        <li><a href="contact.html" class="hover:underline">Contact</a></li>
+        <li><a href="recenzii.html" class="hover:underline">Recenzii</a></li>
+        <li><a href="faq.html" class="underline font-semibold">Întrebări frecvente</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="max-w-4xl mx-auto py-12 px-4">
+    <h2 class="text-3xl font-bold text-center text-blue-800 mb-10">Întrebări frecvente</h2>
+
+    <div class="space-y-6">
+      <div>
+        <button class="accordion-button font-semibold text-left text-lg text-blue-800 w-full" aria-expanded="false" onclick="toggleAccordion(this)">
+          Cum pot face o programare la Cabinetul Individual de Psihologie Tudor Bocăneală?
+        </button>
+        <div class="accordion-content mt-2 text-gray-700">
+          Pentru a face o programare, vă rugăm să ne contactați la numărul de telefon sau prin email pentru a stabili un interval de timp convenabil pentru dumneavoastră.
+        </div>
+      </div>
+
+      <div>
+        <button class="accordion-button font-semibold text-left text-lg text-blue-800 w-full" aria-expanded="false" onclick="toggleAccordion(this)">
+          Cât durează o ședință de terapie la Cabinetul Individual de Psihologie Tudor Bocăneală?
+        </button>
+        <div class="accordion-content mt-2 text-gray-700">
+          O ședință de terapie durează în general 120 de minute, dar durata poate varia în funcție de nevoile dumneavoastră.
+        </div>
+      </div>
+
+      <div>
+        <button class="accordion-button font-semibold text-left text-lg text-blue-800 w-full" aria-expanded="false" onclick="toggleAccordion(this)">
+          Eliberaţi chitanţe şi facturi pentru serviciile Cabinetului Individual de Psihologie Tudor Bocăneală?
+        </button>
+        <div class="accordion-content mt-2 text-gray-700">
+          Da, eliberăm pentru serviciile noastre factură şi chitanţă.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-blue-900 text-white text-center p-4 mt-12">
+    &copy; 2025 Cabinet Psihologic Tudor Bocăneală. Toate drepturile rezervate.
+  </footer>
+
+  <script>
+    function toggleAccordion(button) {
+      const expanded = button.getAttribute("aria-expanded") === "true";
+      document.querySelectorAll('.accordion-button').forEach(btn => btn.setAttribute("aria-expanded", "false"));
+      button.setAttribute("aria-expanded", !expanded);
+    }
+  </script>
+</body>
+</html>

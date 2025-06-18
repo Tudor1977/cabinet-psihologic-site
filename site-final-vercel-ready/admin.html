@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Cabinet Psihologic</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="max-w-xl mx-auto mt-12 p-6 bg-white shadow-md rounded">
+    <h1 class="text-2xl font-bold mb-4 text-blue-800">Administrare articole</h1>
+    <div id="loginForm">
+      <button onclick="loginWithGoogle()" class="bg-red-600 text-white px-4 py-2 rounded w-full">
+        Autentificare cu Google
+      </button>
+      <p id="loginError" class="text-red-600 mt-2 text-sm"></p>
+    </div>
+    <div id="editor" style="display:none;">
+      <textarea id="titlu" placeholder="Titlul articolului" class="w-full p-2 border mb-2 rounded"></textarea>
+      <textarea id="continut" placeholder="Conținutul articolului" class="w-full p-2 border h-32 rounded"></textarea>
+      <button onclick="posteazaArticol()" class="bg-green-600 text-white px-4 py-2 rounded mt-2">Publică articol</button>
+      <p id="postStatus" class="text-green-600 mt-2"></p>
+    </div>
+  </div>
+  <script>
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(() => {
+          document.getElementById("loginForm").style.display = "none";
+          document.getElementById("editor").style.display = "block";
+        })
+        .catch((error) => {
+          document.getElementById("loginError").innerText = "Autentificare eșuată: " + error.message;
+        });
+    }
+
+    function posteazaArticol() {
+      const titlu = document.getElementById("titlu").value;
+      const continut = document.getElementById("continut").value;
+      db.collection("articole").add({
+        titlu: titlu,
+        continut: continut,
+        data: new Date()
+      }).then(() => {
+        document.getElementById("postStatus").innerText = "Articol publicat!";
+        document.getElementById("titlu").value = "";
+        document.getElementById("continut").value = "";
+      }).catch((error) => {
+        document.getElementById("postStatus").innerText = "Eroare: " + error.message;
+      });
+    }
+  </script>
+</body>
+</html>
