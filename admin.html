@@ -48,7 +48,9 @@
       }
     });
 
-    document.getElementById("salveaza").onclick = async () => {
+    const salveazaBtn = document.getElementById("salveaza");
+    salveazaBtn.onclick = async () => {
+      salveazaBtn.disabled = true;
       const titlu = document.getElementById("titlu").value.trim();
       const descriere = document.getElementById("descriere").value.trim();
       const continut = document.getElementById("continut").value.trim();
@@ -59,6 +61,7 @@
         document.getElementById("descriere").value = "";
         document.getElementById("continut").value = "";
       }
+      salveazaBtn.disabled = false;
     };
   </script>
 </body>
