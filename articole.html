@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -39,7 +40,7 @@
       const art = doc.data();
       const div = document.createElement("div");
       div.className = "articol";
-      div.innerHTML = `<h3>${art.titlu}</h3><p>${art.descriere}</p>`;
+      div.innerHTML = `<h3>${art.titlu}</h3><p><strong>${art.descriere}</strong></p><p>${art.continut}</p>`;
       lista.appendChild(div);
     });
   </script>

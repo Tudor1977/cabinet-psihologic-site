@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Articole</title>
+  <title>Admin - Publică articol</title>
   <script type="module" src="firebase-admin.js"></script>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; max-width: 700px; margin: auto; }
@@ -38,9 +39,6 @@
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
-    const loginBtn = document.getElementById('loginBtn');
-    const form = document.getElementById('form');
-
     loginBtn.onclick = () => signInWithPopup(auth, provider);
 
     onAuthStateChanged(auth, user => {
@@ -54,7 +52,6 @@
       const titlu = document.getElementById("titlu").value.trim();
       const descriere = document.getElementById("descriere").value.trim();
       const continut = document.getElementById("continut").value.trim();
-
       if (titlu && descriere && continut) {
         await addDoc(collection(db, "articole"), { titlu, descriere, continut, data: Date.now() });
         alert("Articol publicat!");
