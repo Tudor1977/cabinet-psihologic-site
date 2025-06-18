@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Articole</title>
+  <script type="module" src="firebase-articole.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+    .articol { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+    .articol h3 { margin: 0 0 10px; }
+  </style>
+</head>
+<body>
+  <h1>Articole publicate</h1>
+  <div id="lista-articole">Se încarcă articolele...</div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDQG6WD-N7ZjtNOC_zf8kMASMYEDujihdM",
+      authDomain: "cabinet-psihologic-4666e.firebaseapp.com",
+      projectId: "cabinet-psihologic-4666e",
+      storageBucket: "cabinet-psihologic-4666e.appspot.com",
+      messagingSenderId: "46348242698",
+      appId: "1:46348242698:web:15759be5ce3d4c4df274f3"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const lista = document.getElementById("lista-articole");
+    const articoleQuery = query(collection(db, "articole"), orderBy("data", "desc"));
+
+    const snapshot = await getDocs(articoleQuery);
+    lista.innerHTML = "";
+    snapshot.forEach(doc => {
+      const art = doc.data();
+      const div = document.createElement("div");
+      div.className = "articol";
+      div.innerHTML = `<h3>${art.titlu}</h3><p><strong>${art.descriere}</strong></p><div>${art.continut}</div>`;
+      lista.appendChild(div);
+    });
+  </script>
+</body>
+</html>
