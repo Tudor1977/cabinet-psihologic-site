@@ -1,37 +1,79 @@
 
 <!DOCTYPE html>
+
 <html lang="ro">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin - Cabinet Psihologic</title>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js"></script>
-  <script>
+<meta charset="utf-8"/>
+<title>Admin - Cabinet Psihologic</title>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
   </script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
 </head>
 <body class="bg-gray-100 text-gray-900">
-  <div class="max-w-xl mx-auto mt-12 p-6 bg-white shadow-md rounded">
-    <h1 class="text-2xl font-bold mb-4 text-blue-800">Administrare articole</h1>
-    <div id="loginForm">
-      <button onclick="loginWithGoogle()" class="bg-red-600 text-white px-4 py-2 rounded w-full">
+<header>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Meniu</button>
+<ul class="nav-links" id="menu">
+<li><a href="index.html">Acasă</a></li>
+<li><a href="despre-cabinet.html">Despre cabinet</a></li>
+<li><a href="servicii.html">Servicii</a></li>
+<li><a href="articole.html">Articole</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="recenzii.html">Recenzii</a></li>
+<li><a href="intrebari-frecvente.html">Întrebări frecvente</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+</header>
+<script>
+  function toggleMenu() {
+    document.getElementById('menu').classList.toggle('show');
+  }
+</script>
+<style>
+  .menu-toggle { display: none; background: #2c3e50; color: white; font-size: 20px; padding: 8px; border: none; }
+  .nav-links { display: flex; flex-wrap: wrap; list-style: none; padding: 0; justify-content: center; gap: 10px; margin: 0; }
+  .nav-links li a { text-decoration: none; padding: 10px 14px; background: #2c3e50; color: white; border-radius: 5px; display: inline-block; }
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .nav-links { display: none; flex-direction: column; }
+    .nav-links.show { display: flex; }
+  }
+</style>
+
+
+
+<style>
+  .menu-toggle { display: none; background: #2c3e50; color: white; font-size: 20px; padding: 8px; border: none; }
+  .nav-links { display: flex; flex-wrap: wrap; list-style: none; padding: 0; justify-content: center; gap: 10px; }
+  .nav-links li a { text-decoration: none; padding: 10px 14px; background: #2c3e50; color: white; border-radius: 5px; }
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .nav-links { display: none; flex-direction: column; }
+    .nav-links.show { display: flex; }
+  }
+</style>
+<div class="max-w-xl mx-auto mt-12 p-6 bg-white shadow-md rounded">
+<h1 class="text-2xl font-bold mb-4 text-blue-800">Administrare articole</h1>
+<div id="loginForm">
+<button class="bg-red-600 text-white px-4 py-2 rounded w-full" onclick="loginWithGoogle()">
         Autentificare cu Google
       </button>
-      <p id="loginError" class="text-red-600 mt-2 text-sm"></p>
-    </div>
-    <div id="editor" style="display:none;">
-      <textarea id="titlu" placeholder="Titlul articolului" class="w-full p-2 border mb-2 rounded"></textarea>
-      <textarea id="continut" placeholder="Conținutul articolului" class="w-full p-2 border h-32 rounded"></textarea>
-      <button onclick="posteazaArticol()" class="bg-green-600 text-white px-4 py-2 rounded mt-2">Publică articol</button>
-      <p id="postStatus" class="text-green-600 mt-2"></p>
-    </div>
-  </div>
-  <script>
+<p class="text-red-600 mt-2 text-sm" id="loginError"></p>
+</div>
+<div id="editor" style="display:none;">
+<textarea class="w-full p-2 border mb-2 rounded" id="titlu" placeholder="Titlul articolului"></textarea>
+<textarea class="w-full p-2 border h-32 rounded" id="continut" placeholder="Conținutul articolului"></textarea>
+<button class="bg-green-600 text-white px-4 py-2 rounded mt-2" onclick="posteazaArticol()">Publică articol</button>
+<p class="text-green-600 mt-2" id="postStatus"></p>
+</div>
+</div>
+<script>
     function loginWithGoogle() {
       const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider)

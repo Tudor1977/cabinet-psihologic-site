@@ -1,67 +1,77 @@
 
 <!DOCTYPE html>
+
 <html lang="ro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Despre Cabinet - Tudor Bocăneală</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Despre Cabinet - Tudor Bocăneală</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
 </head>
 <body class="bg-white text-gray-900">
+<header>
+<button class="menu-toggle" onclick="toggleMenu()">☰ Meniu</button>
+<ul class="nav-links" id="menu">
+<li><a href="index.html">Acasă</a></li>
+<li><a href="despre-cabinet.html">Despre cabinet</a></li>
+<li><a href="servicii.html">Servicii</a></li>
+<li><a href="articole.html">Articole</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="recenzii.html">Recenzii</a></li>
+<li><a href="intrebari-frecvente.html">Întrebări frecvente</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+</header>
+<script>
+  function toggleMenu() {
+    document.getElementById('menu').classList.toggle('show');
+  }
+</script>
+<style>
+  .menu-toggle { display: none; background: #2c3e50; color: white; font-size: 20px; padding: 8px; border: none; }
+  .nav-links { display: flex; flex-wrap: wrap; list-style: none; padding: 0; justify-content: center; gap: 10px; margin: 0; }
+  .nav-links li a { text-decoration: none; padding: 10px 14px; background: #2c3e50; color: white; border-radius: 5px; display: inline-block; }
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .nav-links { display: none; flex-direction: column; }
+    .nav-links.show { display: flex; }
+  }
+</style>
 
-  <header class="bg-blue-900 text-white p-4">
-    
-
-<nav class="max-w-6xl mx-auto flex justify-between items-center">
-  <h1 class="text-xl font-bold">Cabinet Psihologic Tudor Bocăneală</h1>
-  <ul class="flex space-x-4">
-    <li><a href="index.html" class="hover:underline">Acasă</a></li>
-    <li><a href="despre-cabinet.html" class="hover:underline">Despre cabinet</a></li>
-    <li><a href="servicii.html" class="hover:underline">Servicii</a></li>
-    <li><a href="articole.html" class="hover:underline">Articole</a></li>
-    <li><a href="contact.html" class="hover:underline">Contact</a></li>
-    <li><a href="recenzii.html" class="hover:underline">Recenzii</a></li>
-    <li><a href="intrebari-frecvente.html" class="hover:underline">Întrebări frecvente</a>
-        <a href='blog.html'>Blog</a></li>
-  </ul>
-</nav>
 
 
-  </header>
-
-  <main class="py-12 px-6 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      
-
-
+<style>
+  .menu-toggle { display: none; background: #2c3e50; color: white; font-size: 20px; padding: 8px; border: none; }
+  .nav-links { display: flex; flex-wrap: wrap; list-style: none; padding: 0; justify-content: center; gap: 10px; }
+  .nav-links li a { text-decoration: none; padding: 10px 14px; background: #2c3e50; color: white; border-radius: 5px; }
+  @media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .nav-links { display: none; flex-direction: column; }
+    .nav-links.show { display: flex; }
+  }
+</style>
+<main class="py-12 px-6 bg-gray-50">
+<div class="max-w-4xl mx-auto">
 <div class="flex justify-center mt-6 mb-8">
-  <img src="logo-colegiul-psihologilor-din-romania.png" alt="Sigla Colegiului Psihologilor" style="height: 120px;">
+<img alt="Sigla Colegiului Psihologilor" src="logo-colegiul-psihologilor-din-romania.png" style="height: 120px;"/>
 </div>
-
-
-
 <h2 class="text-3xl font-bold text-center text-blue-800 mb-8">
         De ce Cabinet Individual de Psihologie Bocăneală Tudor?
       </h2>
-      <div class="space-y-6 text-lg text-gray-800 leading-relaxed">
-        <p><strong>Experiență vastă în diagnostic</strong><br>
+<div class="space-y-6 text-lg text-gray-800 leading-relaxed">
+<p><strong>Experiență vastă în diagnostic</strong><br/>
         Cabinetul Individual de Psihologie Tudor Bocăneală oferă soluții personalizate și eficiente pentru problemele emoționale și comportamentale.</p>
-
-        <p><strong>Servicii personalizate</strong><br>
+<p><strong>Servicii personalizate</strong><br/>
         Evaluare comportamentală și a personalității pentru înțelegerea și identificarea mecanismelor de coping și adaptare.</p>
-
-        <p><strong>Terapie de cuplu și intervenții specifice pentru nevoi speciale</strong><br>
+<p><strong>Terapie de cuplu și intervenții specifice pentru nevoi speciale</strong><br/>
         Oferă suport adaptat pentru nevoile specifice ale clienților, abordând o gamă largă de probleme.</p>
-
-        <p><strong>Suport și îndrumare pentru o viață mai echilibrată și fericită</strong><br>
+<p><strong>Suport și îndrumare pentru o viață mai echilibrată și fericită</strong><br/>
         Echipa oferă suport și îndrumare pentru depășirea dificultăților și îmbunătățirea stării de bine emoțională.</p>
-      </div>
-    </div>
-  </main>
-
-  <footer class="bg-blue-900 text-white text-center p-4 mt-12">
-    &copy; 2025 Cabinet Psihologic Tudor Bocăneală. Toate drepturile rezervate.
+</div>
+</div>
+</main>
+<footer class="bg-blue-900 text-white text-center p-4 mt-12">
+    © 2025 Cabinet Psihologic Tudor Bocăneală. Toate drepturile rezervate.
   </footer>
-
 </body>
 </html>
