@@ -1,65 +1,38 @@
 
 <!DOCTYPE html>
-
 <html lang="ro">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Ce este depresia?</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ce este depresia?</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-white text-gray-900">
-<header>
-<button class="menu-toggle" onclick="toggleMenu()">☰ Meniu</button>
-<ul class="nav-links" id="menu">
-<li><a href="index.html">Acasă</a></li>
-<li><a href="despre-cabinet.html">Despre cabinet</a></li>
-<li><a href="servicii.html">Servicii</a></li>
-<li><a href="articole.html">Articole</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="recenzii.html">Recenzii</a></li>
-<li><a href="intrebari-frecvente.html">Întrebări frecvente</a></li>
-<li><a href="blog.html">Blog</a></li>
-</ul>
-</header>
-<script>
-  function toggleMenu() {
-    document.getElementById('menu').classList.toggle('show');
-  }
-</script>
-<style>
-  .menu-toggle { display: none; background: #2c3e50; color: white; font-size: 20px; padding: 8px; border: none; }
-  .nav-links { display: flex; flex-wrap: wrap; list-style: none; padding: 0; justify-content: center; gap: 10px; margin: 0; }
-  .nav-links li a { text-decoration: none; padding: 10px 14px; background: #2c3e50; color: white; border-radius: 5px; display: inline-block; }
-  @media (max-width: 768px) {
-    .menu-toggle { display: block; }
-    .nav-links { display: none; flex-direction: column; }
-    .nav-links.show { display: flex; }
-  }
-</style>
 
+  <header class="bg-blue-900 text-white p-4">
+    <nav class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">Cabinet Psihologic Tudor Bocăneală</h1>
+      <ul class="flex space-x-4">
+        <li><a href="index.html" class="hover:underline">Acasă</a></li>
+        <li><a href="despre-cabinet.html" class="hover:underline">Despre cabinet</a></li>
+        <li><a href="servicii.html" class="hover:underline">Servicii</a></li>
+        <li><a href="articole.html" class="hover:underline">Articole</a></li>
+      </ul>
+    </nav>
+  </header>
 
-
-<style>
-  .menu-toggle { display: none; background: #2c3e50; color: white; font-size: 20px; padding: 8px; border: none; }
-  .nav-links { display: flex; flex-wrap: wrap; list-style: none; padding: 0; justify-content: center; gap: 10px; }
-  .nav-links li a { text-decoration: none; padding: 10px 14px; background: #2c3e50; color: white; border-radius: 5px; }
-  @media (max-width: 768px) {
-    .menu-toggle { display: block; }
-    .nav-links { display: none; flex-direction: column; }
-    .nav-links.show { display: flex; }
-  }
-</style>
-<main class="py-12 px-6">
-<div class="max-w-3xl mx-auto space-y-6">
-<h2 class="text-3xl font-bold text-blue-800">Ce este depresia?</h2>
-<p class="text-lg text-gray-800 leading-relaxed">Depresia este o tulburare mentală frecventă care afectează modul în care o persoană gândește, simte și se comportă.
+  <main class="py-12 px-6">
+    <div class="max-w-3xl mx-auto space-y-6">
+      <h2 class="text-3xl font-bold text-blue-800">Ce este depresia?</h2>
+      <p class="text-lg text-gray-800 leading-relaxed">Depresia este o tulburare mentală frecventă care afectează modul în care o persoană gândește, simte și se comportă.
 Poate duce la o varietate de probleme emoționale și fizice și poate reduce abilitatea de a funcționa eficient acasă sau la locul de muncă.
 Simptomele includ tristețe persistentă, pierderea interesului pentru activități, insomnie sau hipersomnie, oboseală și sentimente de inutilitate.</p>
-</div>
-</main>
-<footer class="bg-blue-900 text-white text-center p-4 mt-12">
-    © 2025 Cabinet Psihologic Tudor Bocăneală. Toate drepturile rezervate.
+    </div>
+  </main>
+
+  <footer class="bg-blue-900 text-white text-center p-4 mt-12">
+    &copy; 2025 Cabinet Psihologic Tudor Bocăneală. Toate drepturile rezervate.
   </footer>
+
 </body>
 </html>
