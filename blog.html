@@ -3,19 +3,63 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Blog - Cabinet Psihologic Tudor Bocăneală</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 1rem;
+    }
+    h1 {
+      text-align: center;
+      color: #003366;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .card h2 {
+      margin-top: 1rem;
+      color: #003366;
+    }
+    .card p {
+      color: #333;
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #0066cc;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Blogul Cabinetului</h1>
+  <div id="articole"></div>
+
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDQG6WD-N7ZjtNOC_zf8kMASMYEDujihdM",
       authDomain: "cabinet-psihologic-4666e.firebaseapp.com",
-      projectId: "cabinet-psihologic-4666e",
-      storageBucket: "cabinet-psihologic-4666e.appspot.com",
-      messagingSenderId: "46348242698",
-      appId: "1:46348242698:web:15759be5ce3d4c4df274f3"
+      projectId: "cabinet-psihologic-4666e"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -24,45 +68,21 @@
     async function afiseazaArticole() {
       const container = document.getElementById("articole");
       const querySnapshot = await getDocs(collection(db, "articole"));
-
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <img src="${data.imagine}" alt="copertă" style="max-width: 100%; border-radius: 10px;" />
-          <h3>${data.titlu}</h3>
-          <p>${data.text.substring(0, 120)}...</p>
-          <button onclick="window.location.href = 'articol.html?id=' + doc.id">Citește mai mult</button>
-          <p><strong>Etichete:</strong> ${data.etichete?.join(", ")}</p>
+          <img src="${data.imagine || ''}" alt="Imagine articol" />
+          <h2>${data.titlu || 'Fără titlu'}</h2>
+          <p>${data.text?.substring(0, 150) || 'Fără conținut'}...</p>
+          <a href="articol.html?id=${doc.id}">Citește mai mult</a>
         `;
         container.appendChild(card);
       });
     }
 
-    window.onload = afiseazaArticole;
+    afiseazaArticole();
   </script>
-  <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .card {
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 16px;
-      background: #f9f9f9;
-    }
-    button {
-      background: #0066cc;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <h1>Blogul Cabinetului</h1>
-  <div id="articole"></div>
 </body>
 </html>
