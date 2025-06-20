@@ -33,7 +33,7 @@
           <img src="${data.imagine}" alt="copertă" style="max-width: 100%; border-radius: 10px;" />
           <h3>${data.titlu}</h3>
           <p>${data.text.substring(0, 120)}...</p>
-          <button onclick="alert('Deschide articol complet')">Citește mai mult</button>
+          <button onclick="window.location.href = 'articol.html?id=' + doc.id">Citește mai mult</button>
           <p><strong>Etichete:</strong> ${data.etichete?.join(", ")}</p>
         `;
         container.appendChild(card);
