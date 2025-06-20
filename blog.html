@@ -3,19 +3,66 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | Cabinet Psihologic Tudor Bocăneală</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - Cabinet Psihologic Tudor Bocăneală</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDQG6WD-N7ZjtNOC_zf8kMASMYEDujihdM",
+      authDomain: "cabinet-psihologic-4666e.firebaseapp.com",
+      projectId: "cabinet-psihologic-4666e",
+      storageBucket: "cabinet-psihologic-4666e.appspot.com",
+      messagingSenderId: "46348242698",
+      appId: "1:46348242698:web:15759be5ce3d4c4df274f3"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function afiseazaArticole() {
+      const container = document.getElementById("articole");
+      const querySnapshot = await getDocs(collection(db, "articole"));
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${data.imagine}" alt="copertă" style="max-width: 100%; border-radius: 10px;" />
+          <h3>${data.titlu}</h3>
+          <p>${data.text.substring(0, 120)}...</p>
+          <button onclick="alert('Deschide articol complet')">Citește mai mult</button>
+          <p><strong>Etichete:</strong> ${data.etichete?.join(", ")}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.onload = afiseazaArticole;
+  </script>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin: auto; }
-    h1 { color: #333; }
-    .post { border-bottom: 1px solid #ccc; padding: 10px 0; }
-    .post h3 { margin: 0; }
-    .post a { color: #0066cc; text-decoration: none; }
-    .post a:hover { text-decoration: underline; }
+    body { font-family: sans-serif; padding: 20px; }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      background: #f9f9f9;
+    }
+    button {
+      background: #0066cc;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <h1>Blog Cabinet Psihologic Tudor Bocăneală</h1>
-  <p>Nu există încă articole publicate.</p>
+  <h1>Blogul Cabinetului</h1>
+  <div id="articole"></div>
 </body>
 </html>
