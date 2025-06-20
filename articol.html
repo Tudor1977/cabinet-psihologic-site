@@ -5,14 +5,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Articol complet</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2rem;
+      padding-bottom: 4rem;
+      background-color: #fdfdfd;
+    }
+    h1 {
+      color: #003366;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .content {
+      margin-top: 2rem;
+      line-height: 1.6;
+    }
+    .etichete {
+      margin-top: 1rem;
+      font-style: italic;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1 id="titlu"></h1>
-    <img id="imagine" alt="Copertă articol" style="max-width: 100%; height: auto;" />
-    <div id="continut"></div>
-    <p><strong>Etichete:</strong> <span id="etichete"></span></p>
+    <h1 id="titlu">Se încarcă...</h1>
+    <img id="imagine" alt="Imagine copertă" />
+    <div id="continut" class="content"></div>
+    <div class="etichete">Etichete: <span id="etichete"></span></div>
   </div>
 
   <script type="module">
@@ -20,35 +51,32 @@
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyD7w9K5d9ZUPRNgKm1qJ37tP_q1lTx6xQQ",
+      apiKey: "AIzaSyDQG6WD-N7ZjtNOC_zf8kMASMYEDujihdM",
       authDomain: "cabinet-psihologic-4666e.firebaseapp.com",
-      projectId: "cabinet-psihologic-4666e",
-      storageBucket: "cabinet-psihologic-4666e.appspot.com",
-      messagingSenderId: "790093891902",
-      appId: "1:790093891902:web:7f1946c51ef03a2356e11f"
+      projectId: "cabinet-psihologic-4666e"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
 
-    if (id) {
-      const docRef = doc(db, "articole", id);
-      getDoc(docRef).then((docSnap) => {
+    if (!id) {
+      document.body.innerHTML = "<p style='color:red;'>Lipsă ID articol.</p>";
+    } else {
+      const ref = doc(db, "articole", id);
+      getDoc(ref).then(docSnap => {
         if (docSnap.exists()) {
-          const data = docSnap.data();
-          document.getElementById("titlu").innerText = data.titlu || "";
-          document.getElementById("imagine").src = data.imagine || "";
-          document.getElementById("continut").innerHTML = data.text || "";
-          document.getElementById("etichete").innerText = data.etichete || "";
+          const articol = docSnap.data();
+          document.getElementById("titlu").textContent = articol.titlu || "Fără titlu";
+          document.getElementById("imagine").src = articol.imagine || "";
+          document.getElementById("continut").innerHTML = articol.text || "";
+          document.getElementById("etichete").textContent = (articol.etichete || []).join(", ");
         } else {
-          document.body.innerHTML = "<p>Articolul nu a fost găsit.</p>";
+          document.body.innerHTML = "<p style='color:red;'>Articol inexistent.</p>";
         }
       });
-    } else {
-      document.body.innerHTML = "<p>ID articol lipsă.</p>";
     }
   </script>
 </body>
