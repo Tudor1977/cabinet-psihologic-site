@@ -1,0 +1,1 @@
+<!-- main.js - versiune funcțională pentru blog -->

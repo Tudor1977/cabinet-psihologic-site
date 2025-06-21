@@ -1,11 +1,122 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recenzii</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recenzii - Cabinet Psihologic Tudor Bocăneală</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <h1>Recenzii funcțional</h1>
+<body class="bg-white text-gray-900">
+
+  <header class="bg-blue-900 text-white p-4">
+    
+<nav class="max-w-6xl mx-auto flex justify-between items-center">
+  <h1 class="text-xl font-bold">Cabinet Psihologic Tudor Bocăneală</h1>
+  <ul class="flex space-x-4">
+    <li><a href="index.html" class="hover:underline">Acasă</a></li>
+    <li><a href="despre-cabinet.html" class="hover:underline">Despre cabinet</a></li>
+    <li><a href="servicii.html" class="hover:underline">Servicii</a></li>
+    <li><a href="articole.html" class="hover:underline">Articole</a></li>
+    <li><a href="contact.html" class="hover:underline">Contact</a></li>
+    <li><a href="recenzii.html" class="hover:underline">Recenzii</a></li>
+    <li><a href="intrebari-frecvente.html" class="hover:underline">Întrebări frecvente</a>
+        <a href='blog.html'>Blog</a></li>
+  </ul>
+</nav>
+
+  </header>
+
+  <main class="py-12 px-6 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-blue-800 mb-10">Recenzii</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="bg-white p-6 shadow-md rounded-md">
+          <p class="font-bold text-lg mb-1">R. S.</p>
+          <p class="text-yellow-500 mb-2">★★★★★</p>
+          <p class="text-gray-800">Am fost la Cabinetul Individual de Psihologie Tudor Bocăneală de câteva luni și sunt extrem de mulțumit de serviciile oferite. Recomand cu încredere acest loc.</p>
+        </div>
+
+        <div class="bg-white p-6 shadow-md rounded-md">
+          <p class="font-bold text-lg mb-1">A. N.</p>
+          <p class="text-yellow-500 mb-2">★★★★★</p>
+          <p class="text-gray-800">Echipa de la Cabinetul Individual de Psihologie Tudor Bocăneală este cu adevărat excepțională. Mulțumesc pentru ghidare și suportul oferit.</p>
+        </div>
+
+        <div class="bg-white p-6 shadow-md rounded-md">
+          <p class="font-bold text-lg mb-1">B. T.</p>
+          <p class="text-yellow-500 mb-2">★★★★★</p>
+          <p class="text-gray-800">Sunt recunoscător pentru suportul și expertiza oferite de acest cabinet și sunt convins că decizia de a apela la serviciile lor a fost una extrem de benefică pentru mine.</p>
+        </div>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+<div class="mt-12 bg-white p-6 rounded shadow max-w-xl mx-auto">
+  <h3 class="text-xl font-semibold text-blue-800 mb-4">Lasă o recenzie</h3>
+  <form id="recenzieForm" class="space-y-4">
+    <input type="text" id="initiale" placeholder="Inițiale (ex: A. B.)" required class="w-full p-2 border border-gray-300 rounded">
+    <div class="flex items-center space-x-2">
+      <label for="rating">Rating:</label>
+      <div id="stele" class="flex space-x-1">
+        <span class="star text-2xl cursor-pointer text-gray-400">&#9733;</span>
+        <span class="star text-2xl cursor-pointer text-gray-400">&#9733;</span>
+        <span class="star text-2xl cursor-pointer text-gray-400">&#9733;</span>
+        <span class="star text-2xl cursor-pointer text-gray-400">&#9733;</span>
+        <span class="star text-2xl cursor-pointer text-gray-400">&#9733;</span>
+      </div>
+      <input type="hidden" id="rating" name="rating" value="0">
+    </div>
+    <textarea id="comentariu" placeholder="Scrie recenzia ta..." required class="w-full p-2 border border-gray-300 rounded h-24"></textarea>
+    <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800">Trimite recenzia</button>
+  </form>
+</div>
+
+<script>
+  const stele = document.querySelectorAll('.star');
+  const ratingInput = document.getElementById('rating');
+  stele.forEach((stea, index) => {
+    stea.addEventListener('click', () => {
+      ratingInput.value = index + 1;
+      stele.forEach((s, i) => {
+        s.classList.toggle('text-yellow-400', i <= index);
+        s.classList.toggle('text-gray-400', i > index);
+      });
+    });
+  });
+
+  document.getElementById('recenzieForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const initiale = document.getElementById('initiale').value;
+    const rating = document.getElementById('rating').value;
+    const comentariu = document.getElementById('comentariu').value;
+
+    const nouCard = document.createElement('div');
+    nouCard.className = 'bg-white p-6 shadow-md rounded-md';
+    nouCard.innerHTML = `
+      <p class="font-bold text-lg mb-1">${initiale}</p>
+      <p class="text-yellow-500 mb-2">${'★'.repeat(rating)}</p>
+      <p class="text-gray-800">${comentariu}</p>
+    `;
+    document.querySelector('.grid').appendChild(nouCard);
+    this.reset();
+    stele.forEach(s => s.classList.replace('text-yellow-400', 'text-gray-400'));
+  });
+</script>
+
+</main>
+
+  <footer class="bg-blue-900 text-white text-center p-4 mt-12">
+    &copy; 2025 Cabinet Psihologic Tudor Bocăneală. Toate drepturile rezervate.
+  </footer>
+
 </body>
 </html>
